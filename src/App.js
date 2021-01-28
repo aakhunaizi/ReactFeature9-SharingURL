@@ -7,7 +7,7 @@ import {
   Title,
 } from "./styles";
 import React, { useState } from "react";
-
+import { Helmet } from "react-helmet";
 import Home from "./components/Home";
 import NavBar from "./components/NavBar";
 // Components
@@ -51,11 +51,17 @@ function App() {
 
   return (
     <ThemeProvider theme={theme[currentTheme]}>
+      <Helmet>
+        <title>Cookies and Beyond</title>
+      </Helmet>
       <GlobalStyle />
       <NavBar currentTheme={currentTheme} toggleTheme={toggleTheme} />
       <Switch>
         <Route exact path="/">
           <Home />
+        </Route>
+        <Route path="/products/:productSlug">
+          <ProductDetail products={_products} deleteProduct={deleteProduct} />
         </Route>
         <Route path="/products">
           <ProductList products={_products} deleteProduct={deleteProduct} />
