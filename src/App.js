@@ -1,11 +1,5 @@
 // Styling
-import {
-  Description,
-  GlobalStyle,
-  ShopImage,
-  ThemeButton,
-  Title,
-} from "./styles";
+import { GlobalStyle } from "./styles";
 import React, { useState } from "react";
 import { Helmet } from "react-helmet";
 import Home from "./components/Home";
