@@ -10,7 +10,6 @@ import ProductList from "./components/ProductList";
 import { ThemeProvider } from "styled-components";
 import { Route, Switch } from "react-router";
 // Data
-import products from "./products";
 
 const theme = {
   light: {
@@ -29,16 +28,6 @@ const theme = {
 
 function App() {
   const [currentTheme, setCurrentTheme] = useState("light");
-  const [product, setProduct] = useState(null);
-  const [_products, setProducts] = useState(products);
-
-  const deleteProduct = (productId) => {
-    const updatedProducts = _products.filter(
-      (product) => product.id !== +productId
-    );
-    setProducts(updatedProducts);
-    setProduct(null);
-  };
 
   const toggleTheme = () =>
     setCurrentTheme(currentTheme === "light" ? "dark" : "light");
@@ -55,10 +44,10 @@ function App() {
           <Home />
         </Route>
         <Route path="/products/:productSlug">
-          <ProductDetail products={_products} deleteProduct={deleteProduct} />
+          <ProductDetail />
         </Route>
         <Route path="/products">
-          <ProductList products={_products} deleteProduct={deleteProduct} />
+          <ProductList />
         </Route>
       </Switch>
     </ThemeProvider>
