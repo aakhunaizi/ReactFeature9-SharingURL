@@ -14,6 +14,13 @@ const reducer = (state = initialState, action) => {
         ),
       };
 
+    case "CREATE_PRODUCT":
+      action.payload.newProduct.id = state.products[state.products.length - 1];
+      return {
+        ...state,
+        products: [...state.products, action.payload.newProduct],
+      };
+
     default:
       return state;
   }

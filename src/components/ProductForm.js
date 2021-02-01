@@ -1,12 +1,19 @@
 import { useState } from "react";
 import { BackButtonStyled, CreateButtonStyled } from "../styles";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { createProduct } from "../store/actions";
+import { useHistory } from "react-router-dom";
 const ProductForm = () => {
+  const history = useHistory();
+
+  const dispatch = useDispatch();
+
   const [product, setProduct] = useState({
-    productname: "",
-    productprice: 0,
-    productdescription: "",
-    productimage: "",
+    name: "",
+    price: 0,
+    description: "",
+    image: "",
   });
 
   const handleChange = (event) => {
@@ -15,7 +22,8 @@ const ProductForm = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(product);
+    dispatch(createProduct(product));
+    history.push("/products");
   };
 
   return (
@@ -25,7 +33,7 @@ const ProductForm = () => {
           <label>Name</label>
           <input
             type="text"
-            name="productname"
+            name="name"
             placeholder="Enter product name"
             className="form-control"
             onChange={handleChange}
@@ -34,7 +42,7 @@ const ProductForm = () => {
             <label>Price</label>
             <input
               type="number"
-              name="productprice"
+              name="price"
               min="1"
               placeholder="Enter product price"
               className="form-control"
@@ -46,7 +54,7 @@ const ProductForm = () => {
           <label>Description</label>
           <input
             type="text"
-            name="productdescription"
+            name="description"
             placeholder="Enter product description"
             className="form-control"
             onChange={handleChange}
@@ -56,7 +64,7 @@ const ProductForm = () => {
           <label>Image</label>
           <input
             type="text"
-            name="productimage"
+            name="image"
             placeholder="Enter product image url"
             className="form-control"
             onChange={handleChange}
