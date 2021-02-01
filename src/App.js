@@ -9,6 +9,8 @@ import ProductDetail from "./components/ProductDetail";
 import ProductList from "./components/ProductList";
 import { ThemeProvider } from "styled-components";
 import { Route, Switch } from "react-router";
+import ProductForm from "./components/ProductForm";
+
 // Data
 
 const theme = {
@@ -46,6 +48,10 @@ function App() {
         <Route path="/products/:productSlug">
           <ProductDetail />
         </Route>
+        <Route path="/new">
+          <ProductForm />
+        </Route>
+
         <Route path="/products">
           <ProductList />
         </Route>

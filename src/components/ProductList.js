@@ -5,6 +5,7 @@ import ProductItem from "./ProductItem";
 import SearchBar from "./SearchBar";
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import AddButton from "./buttons/AddButton";
 
 const ProductList = () => {
   const products = useSelector((state) => state.products);
@@ -20,6 +21,9 @@ const ProductList = () => {
   return (
     <div>
       <SearchBar setQuery={setQuery} />
+      <div>
+        <AddButton />
+      </div>
       <ListWrapper>{productList}</ListWrapper>
     </div>
   );
