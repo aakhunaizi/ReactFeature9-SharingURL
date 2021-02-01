@@ -48,7 +48,7 @@ function App() {
         <Route path="/products/:productSlug">
           <ProductDetail />
         </Route>
-        <Route path="/new">
+        <Route path="/new/product">
           <ProductForm />
         </Route>
 

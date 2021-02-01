@@ -5,7 +5,7 @@ import { AddButtonStyled } from "../../styles";
 const AddButton = () => {
   return (
     <AddButtonStyled>
-      <Link to="/new">
+      <Link to="/new/product">
         <MdAddCircle color="#ff85a2" size="1.5em" />
       </Link>
     </AddButtonStyled>
