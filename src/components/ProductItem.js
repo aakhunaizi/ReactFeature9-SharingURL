@@ -1,5 +1,6 @@
 // Components
 import DeleteButton from "./buttons/DeleteButton";
+import UpdateButton from "./buttons/UpdateButton";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
 // Styling
@@ -20,6 +21,7 @@ const ProductItem = (props) => {
       <p>{product.name}</p>
       <p className="product-price">{product.price} KD</p>
       <DeleteButton productId={product.id} />
+      <UpdateButton productSlug={product.slug} />
     </ProductWrapper>
   );
 };

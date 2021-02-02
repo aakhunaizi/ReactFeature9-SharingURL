@@ -5,7 +5,7 @@ import { AddButtonStyled } from "../../styles";
 const UpdateButton = ({ productSlug }) => {
   return (
     <AddButtonStyled>
-      <Link to={`products/${productSlug}/edit`}>
+      <Link to={`/products/${productSlug}/edit`}>
         <MdModeEdit color="#ff85a2" size="1.5em" />
       </Link>
     </AddButtonStyled>

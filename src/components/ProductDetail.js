@@ -5,6 +5,7 @@ import { Helmet } from "react-helmet";
 import { useSelector } from "react-redux";
 // Styling
 import { DetailWrapper } from "../styles";
+import UpdateButton from "./buttons/UpdateButton";
 
 const ProductDetail = () => {
   const products = useSelector((state) => state.products);
@@ -23,6 +24,7 @@ const ProductDetail = () => {
       <p>{product.description}</p>
       <p>{product.price} KD</p>
       <DeleteButton productId={product.id} />
+      <UpdateButton productSlug={product.slug} />
     </DetailWrapper>
   );
 };
