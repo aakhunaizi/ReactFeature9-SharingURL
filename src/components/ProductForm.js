@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { createProduct } from "../store/actions";
 import { useHistory } from "react-router-dom";
+import { Helmet } from "react-helmet";
 const ProductForm = () => {
   const history = useHistory();
 
@@ -28,6 +29,9 @@ const ProductForm = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Add Product</title>
+      </Helmet>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label>Name</label>
