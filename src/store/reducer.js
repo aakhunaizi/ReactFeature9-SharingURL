@@ -1,4 +1,5 @@
 import productsData from "../products";
+import { CREATE_PRODUCT, DELETE_PRODUCT } from "../store/actions";
 import slugify from "react-slugify";
 
 const initialState = {
@@ -7,7 +8,7 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case "DELETE_PRODUCT":
+    case DELETE_PRODUCT:
       return {
         ...state,
         products: state.products.filter(
@@ -15,7 +16,7 @@ const reducer = (state = initialState, action) => {
         ),
       };
 
-    case "CREATE_PRODUCT":
+    case CREATE_PRODUCT:
       const { newProduct } = action.payload;
       newProduct.id = state.products[state.products.length - 1].id + 1;
       newProduct.slug = slugify(newProduct.name);
