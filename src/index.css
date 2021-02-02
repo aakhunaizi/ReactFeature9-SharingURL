@@ -26,3 +26,7 @@ label {
 .form-control {
   margin-bottom: 1%;
 }
+
+p {
+  text-align: center;
+}
