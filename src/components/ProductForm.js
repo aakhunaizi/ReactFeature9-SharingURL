@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { BackButtonStyled, CreateButtonStyled } from "../styles";
-import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { createProduct } from "../store/actions";
+import { BackButtonStyled, CreateButtonStyled, ListWrapper } from "../styles";
+import { Link, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { createProduct, updateProduct } from "../store/actions";
 import { useHistory } from "react-router-dom";
 import { Helmet } from "react-helmet";
 const ProductForm = () => {
@@ -10,12 +10,19 @@ const ProductForm = () => {
 
   const dispatch = useDispatch();
 
-  const [product, setProduct] = useState({
-    name: "",
-    price: 0,
-    description: "",
-    image: "",
-  });
+  const { productSlug } = useParams();
+  const productExists = useSelector((state) =>
+    state.products.find((product) => product.slug === productSlug)
+  );
+
+  const [product, setProduct] = useState(
+    productExists ?? {
+      name: "",
+      price: 0,
+      description: "",
+      image: "",
+    }
+  );
 
   const handleChange = (event) => {
     setProduct({ ...product, [event.target.name]: event.target.value });
@@ -23,15 +30,18 @@ const ProductForm = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch(createProduct(product));
+    productExists
+      ? dispatch(updateProduct(product))
+      : dispatch(createProduct(product));
     history.push("/products");
   };
 
   return (
     <>
       <Helmet>
-        <title>Add Product</title>
+        <title>{productExists ? "Update" : "Create"}</title>
       </Helmet>
+      <ListWrapper>{productExists ? "Update" : "Create"} Product</ListWrapper>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label>Name</label>
@@ -40,6 +50,7 @@ const ProductForm = () => {
             name="name"
             placeholder="Enter product name"
             className="form-control"
+            value={product.name}
             onChange={handleChange}
           />
           <div className="form-group">
@@ -50,6 +61,7 @@ const ProductForm = () => {
               min="1"
               placeholder="Enter product price"
               className="form-control"
+              value={product.price}
               onChange={handleChange}
             />
           </div>
@@ -61,6 +73,7 @@ const ProductForm = () => {
             name="description"
             placeholder="Enter product description"
             className="form-control"
+            value={product.description}
             onChange={handleChange}
           />
         </div>
@@ -71,10 +84,13 @@ const ProductForm = () => {
             name="image"
             placeholder="Enter product image url"
             className="form-control"
+            value={product.image}
             onChange={handleChange}
           />
         </div>
-        <CreateButtonStyled onSubmit={handleSubmit}>Create</CreateButtonStyled>
+        <CreateButtonStyled onSubmit={handleSubmit}>
+          {productExists ? "Update" : "Create"}
+        </CreateButtonStyled>
         <Link to="/products">
           <BackButtonStyled>Back</BackButtonStyled>
         </Link>

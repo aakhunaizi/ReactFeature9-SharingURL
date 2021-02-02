@@ -1,7 +1,15 @@
 import styled, { createGlobalStyle } from "styled-components";
 import { Link, NavLink } from "react-router-dom";
-export const DeleteButtonStyled = styled.p`
-  color: ${(props) => props.theme.red};
+export const DeleteButtonStyled = styled.button`
+  background: ${(props) => props.theme.red};
+  border-radius: 3px;
+  border: 2px solid ${(props) => props.theme.red};
+  color: white;
+  margin: 0 1em;
+  padding: 0.25em 1em;
+  margin: auto;
+  margin-bottom: 2%;
+  display: block;
 `;
 
 export const Description = styled.h4`

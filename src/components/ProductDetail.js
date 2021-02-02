@@ -24,7 +24,7 @@ const ProductDetail = () => {
       <p>{product.description}</p>
       <p>{product.price} KD</p>
       <DeleteButton productId={product.id} />
-      <UpdateButton productSlug={product.slug} />
+      <UpdateButton className="float-right" productSlug={product.slug} />
     </DetailWrapper>
   );
 };
