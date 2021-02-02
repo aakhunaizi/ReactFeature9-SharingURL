@@ -45,11 +45,11 @@ function App() {
         <Route exact path="/">
           <Home />
         </Route>
+        <Route path="/products/new">
+          <ProductForm />
+        </Route>
         <Route path="/products/:productSlug">
           <ProductDetail />
-        </Route>
-        <Route path="/new/product">
-          <ProductForm />
         </Route>
 
         <Route path="/products">
