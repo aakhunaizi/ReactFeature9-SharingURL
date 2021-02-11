@@ -23,8 +23,6 @@ const reducer = (state = initialState, action) => {
 
     case CREATE_PRODUCT:
       const { newProduct } = action.payload;
-      newProduct.slug = slugify(newProduct.name, { lower: true });
-      newProduct.id = state.products[state.products.length - 1].id + 1;
       return {
         ...state,
         products: [...state.products, newProduct],

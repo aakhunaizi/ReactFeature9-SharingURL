@@ -27,10 +27,13 @@ export const fetchProducts = () => {
 export const createProduct = (newProduct) => {
   return async (dispatch) => {
     try {
-      await axios.post(`http://localhost:8000/products/`, newProduct);
+      const response = await axios.post(
+        `http://localhost:8000/products/`,
+        newProduct
+      );
       dispatch({
         type: CREATE_PRODUCT,
-        payload: { newProduct },
+        payload: { newProduct: response.data },
       });
     } catch (error) {
       console.error(error);
@@ -41,10 +44,12 @@ export const createProduct = (newProduct) => {
 export const deleteProduct = (productId) => {
   return async (dispatch) => {
     try {
-      await axios.delete(`http://localhost:8000/products/${productId}`);
+      const response = await axios.delete(
+        `http://localhost:8000/products/${productId}`
+      );
       dispatch({
         type: DELETE_PRODUCT,
-        payload: { productId },
+        payload: { productId: response.data },
       });
     } catch (error) {
       console.error(error);
