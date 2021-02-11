@@ -58,13 +58,13 @@ export const deleteProduct = (productId) => {
 export const updateProduct = (updatedProduct) => {
   return async (dispatch) => {
     try {
-      const response = await axios.put(
+      await axios.put(
         `http://localhost:8000/products/${updatedProduct.id}`,
         updatedProduct
       );
       dispatch({
         type: UPDATE_PRODUCT,
-        payload: { updatedProduct: response.data },
+        payload: { updatedProduct },
       });
     } catch (error) {
       console.error(error);
