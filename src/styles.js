@@ -152,3 +152,10 @@ export const BackButtonStyled = styled.button`
     background-color: ${(props) => props.theme.backgroundColor};
   }
 `;
+
+export const LoadingWrapper = styled.div`
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  margin: 10%;
+`;

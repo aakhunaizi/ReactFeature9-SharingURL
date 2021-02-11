@@ -20,7 +20,7 @@ const ProductItem = (props) => {
 
       <p>{product.name}</p>
       <p className="product-price">{product.price} KD</p>
-      <DeleteButton productId={product.id} />
+      <DeleteButton productId={product.id}> </DeleteButton>
       <UpdateButton productSlug={product.slug} />
     </ProductWrapper>
   );

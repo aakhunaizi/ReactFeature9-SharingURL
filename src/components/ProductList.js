@@ -6,11 +6,14 @@ import SearchBar from "./SearchBar";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import AddButton from "./buttons/AddButton";
+import LoadingScreen from "./Loading";
 
 const ProductList = () => {
   const products = useSelector((state) => state.products);
-
+  const loading = useSelector((state) => state.loading);
   const [query, setQuery] = useState("");
+
+  if (loading) return <LoadingScreen />;
 
   const productList = products
     .filter((product) =>

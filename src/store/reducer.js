@@ -1,17 +1,34 @@
-import productsData from "../products";
 import {
-  CREATE_PRODUCT,
+  ADD_PRODUCT,
   DELETE_PRODUCT,
   UPDATE_PRODUCT,
-} from "../store/actions";
-import slugify from "react-slugify";
+  FETCH_PRODUCTS,
+} from "./actions";
+
+import slugify from "slugify";
 
 const initialState = {
-  products: productsData,
+  products: [],
+  loading: true,
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case FETCH_PRODUCTS:
+      return {
+        ...state,
+        products: action.payload.products,
+        loading: false,
+      };
+
+    case ADD_PRODUCT:
+      const { newProduct } = action.payload;
+      newProduct.slug = slugify(newProduct.name, { lower: true });
+      newProduct.id = state.products[state.products.length - 1].id + 1;
+      return {
+        ...state,
+        products: [...state.products, newProduct],
+      };
     case DELETE_PRODUCT:
       return {
         ...state,
@@ -19,16 +36,6 @@ const reducer = (state = initialState, action) => {
           (product) => product.id !== action.payload.productId
         ),
       };
-
-    case CREATE_PRODUCT:
-      const { newProduct } = action.payload;
-      newProduct.id = state.products[state.products.length - 1].id + 1;
-      newProduct.slug = slugify(newProduct.name);
-      return {
-        ...state,
-        products: [...state.products, newProduct],
-      };
-
     case UPDATE_PRODUCT:
       const { updatedProduct } = action.payload;
       return {
