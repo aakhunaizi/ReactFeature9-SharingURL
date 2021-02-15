@@ -36,6 +36,9 @@ const ProductForm = () => {
     history.push("/products");
   };
 
+  const handleImage = (event) =>
+    setProduct({ ...product, image: event.target.files[0] });
+
   return (
     <>
       <Helmet>
@@ -80,12 +83,11 @@ const ProductForm = () => {
         <div className="form-group">
           <label>Image</label>
           <input
-            type="text"
+            type="file"
             name="image"
             placeholder="Enter product image url"
             className="form-control"
-            value={product.image}
-            onChange={handleChange}
+            onChange={handleImage}
           />
         </div>
         <CreateButtonStyled onSubmit={handleSubmit}>

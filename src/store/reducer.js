@@ -5,8 +5,6 @@ import {
   FETCH_PRODUCTS,
 } from "./actions";
 
-import slugify from "slugify";
-
 const initialState = {
   products: [],
   loading: true,
