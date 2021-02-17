@@ -1,21 +1,19 @@
 // IMPORTS
 
-import axios from "axios";
+import instance from "./instance";
 
 // ACTION TYPES
-export const CREATE_PRODUCT = "CREATE_PRODUCT";
-export const FETCH_PRODUCTS = "FETCH_PRODUCTS";
-export const UPDATE_PRODUCT = "UPDATE_PRODUCT";
-export const DELETE_PRODUCT = "DELETE_PRODUCT";
+
+import * as types from "./types";
 
 // ACTIONS
 
 export const fetchProducts = () => {
   return async (dispatch) => {
     try {
-      const res = await axios.get("http://localhost:8000/products/");
+      const res = await instance.get("/products/");
       dispatch({
-        type: FETCH_PRODUCTS,
+        type: types.FETCH_PRODUCTS,
         payload: { products: res.data },
       });
     } catch (error) {
@@ -29,9 +27,12 @@ export const createProduct = (newProduct) => {
     try {
       const formData = new FormData();
       for (const key in newProduct) formData.append(key, newProduct[key]);
-      const res = await axios.post("http://localhost:8000/products", formData);
+      const res = await instance.post(
+        `/shops/${newProduct.shopId}/products`,
+        formData
+      );
       dispatch({
-        type: CREATE_PRODUCT,
+        type: types.CREATE_PRODUCT,
         payload: { newProduct: res.data },
       });
     } catch (error) {
@@ -43,9 +44,9 @@ export const createProduct = (newProduct) => {
 export const deleteProduct = (productId) => {
   return async (dispatch) => {
     try {
-      await axios.delete(`http://localhost:8000/products/${productId}`);
+      await instance.delete(`/products/${productId}`);
       dispatch({
-        type: DELETE_PRODUCT,
+        type: types.DELETE_PRODUCT,
         payload: { productId },
       });
     } catch (error) {
@@ -60,12 +61,12 @@ export const updateProduct = (updatedProduct) => {
       const formData = new FormData();
       for (const key in updatedProduct)
         formData.append(key, updatedProduct[key]);
-      const res = await axios.put(
-        `http://localhost:8000/products/${updatedProduct.id}`,
+      const res = await instance.put(
+        `/products/${updatedProduct.id}`,
         formData
       );
       dispatch({
-        type: UPDATE_PRODUCT,
+        type: types.UPDATE_PRODUCT,
         payload: { updatedProduct: res.data },
       });
     } catch (error) {

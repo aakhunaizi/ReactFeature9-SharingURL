@@ -2,7 +2,7 @@ import { useState } from "react";
 import { BackButtonStyled, CreateButtonStyled, ListWrapper } from "../styles";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { createProduct, updateProduct } from "../store/actions";
+import { createProduct, updateProduct } from "../store/actions/productActions";
 import { useHistory } from "react-router-dom";
 import { Helmet } from "react-helmet";
 const ProductForm = () => {
@@ -10,13 +10,14 @@ const ProductForm = () => {
 
   const dispatch = useDispatch();
 
-  const { productSlug } = useParams();
+  const { productSlug, shopId } = useParams();
   const productExists = useSelector((state) =>
-    state.products.find((product) => product.slug === productSlug)
+    state.products.products.find((product) => product.slug === productSlug)
   );
 
   const [product, setProduct] = useState(
     productExists ?? {
+      shopId: shopId,
       name: "",
       price: 0,
       description: "",

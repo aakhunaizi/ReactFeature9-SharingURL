@@ -10,6 +10,9 @@ import ProductList from "./components/ProductList";
 import { ThemeProvider } from "styled-components";
 import { Route, Switch } from "react-router";
 import ProductForm from "./components/ProductForm";
+import ShopList from "./components/ShopList";
+import { useSelector } from "react-redux";
+import ShopDetail from "./components/ShopDetail";
 
 // Data
 
@@ -34,6 +37,8 @@ function App() {
   const toggleTheme = () =>
     setCurrentTheme(currentTheme === "light" ? "dark" : "light");
 
+  const products = useSelector((state) => state.products.products);
+
   return (
     <ThemeProvider theme={theme[currentTheme]}>
       <Helmet>
@@ -42,14 +47,22 @@ function App() {
       <GlobalStyle />
       <NavBar currentTheme={currentTheme} toggleTheme={toggleTheme} />
       <Switch>
-        <Route path={["/products/new", "/products/:productSlug/edit"]}>
+        <Route
+          path={["/shops/:shopId/products/new", "/products/:productSlug/edit"]}
+        >
           <ProductForm />
         </Route>
         <Route path="/products/:productSlug">
           <ProductDetail />
         </Route>
         <Route path="/products">
-          <ProductList />
+          <ProductList products={products} />
+        </Route>
+        <Route path="/shops/:shopSlug">
+          <ShopDetail />
+        </Route>
+        <Route path="/shops">
+          <ShopList />
         </Route>
         <Route path="/">
           <Home />

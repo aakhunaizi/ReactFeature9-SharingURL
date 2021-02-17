@@ -2,7 +2,7 @@
 import DeleteButton from "./buttons/DeleteButton";
 import UpdateButton from "./buttons/UpdateButton";
 import { Link } from "react-router-dom";
-import { Helmet } from "react-helmet";
+
 // Styling
 import { ProductWrapper } from "../styles";
 
@@ -11,9 +11,6 @@ const ProductItem = (props) => {
 
   return (
     <ProductWrapper>
-      <Helmet>
-        <title>Products</title>
-      </Helmet>
       <Link to={`/products/${product.slug}`}>
         <img alt={product.name} src={product.image} />
       </Link>

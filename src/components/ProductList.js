@@ -5,17 +5,16 @@ import ProductItem from "./ProductItem";
 import SearchBar from "./SearchBar";
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import AddButton from "./buttons/AddButton";
 import LoadingScreen from "./Loading";
 
-const ProductList = () => {
-  const products = useSelector((state) => state.products);
-  const loading = useSelector((state) => state.loading);
+const ProductList = ({ products }) => {
+  const loading = useSelector((state) => state.products.loading);
   const [query, setQuery] = useState("");
 
   if (loading) return <LoadingScreen />;
 
   const productList = products
+    .filter((product) => product)
     .filter((product) =>
       product.name.toLowerCase().includes(query.toLowerCase())
     )
@@ -24,7 +23,6 @@ const ProductList = () => {
   return (
     <div>
       <SearchBar setQuery={setQuery} />
-      <AddButton />
       <ListWrapper>{productList}</ListWrapper>
     </div>
   );
