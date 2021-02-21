@@ -9,3 +9,7 @@ export const DELETE_PRODUCT = "DELETE_PRODUCT";
 
 export const CREATE_SHOP = "CREATE_SHOP";
 export const FETCH_SHOPS = "FETCH_SHOPS";
+
+//Authentication Types
+
+export const SET_USER = "SET_USER";

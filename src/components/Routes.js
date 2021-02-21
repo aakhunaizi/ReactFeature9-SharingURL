@@ -8,6 +8,7 @@ import ShopList from "./ShopList";
 import ShopDetail from "./ShopDetail";
 import Signup from "./SignupForm";
 import LoadingScreen from "./Loading";
+import Signin from "./SigninForm";
 
 const Routes = () => {
   const products = useSelector((state) => state.products.products);
@@ -21,6 +22,9 @@ const Routes = () => {
     <Switch>
       <Route path={"/signup"}>
         <Signup />
+      </Route>
+      <Route path={"/signin"}>
+        <Signin />
       </Route>
       <Route
         path={["/shops/:shopId/products/new", "/products/:productSlug/edit"]}

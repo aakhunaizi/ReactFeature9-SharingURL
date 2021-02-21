@@ -168,3 +168,14 @@ export const ShopButtonStyled = styled.button`
   padding: 0.25em 1em;
   margin-left: 6%;
 `;
+
+export const SignOutStyled = styled.button`
+  background: transparent;
+  border-radius: 3px;
+  border: 2px solid ${(props) => props.theme.pink};
+  color: palevioletred;
+  &:hover {
+    color: ${(props) => props.theme.mainColor};
+    background-color: ${(props) => props.theme.pink};
+  }
+`;
