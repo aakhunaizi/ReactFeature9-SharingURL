@@ -4,14 +4,9 @@ import { ListWrapper } from "../styles";
 import ProductItem from "./ProductItem";
 import SearchBar from "./SearchBar";
 import { useState } from "react";
-import { useSelector } from "react-redux";
-import LoadingScreen from "./Loading";
 
 const ProductList = ({ products }) => {
-  const loading = useSelector((state) => state.products.loading);
   const [query, setQuery] = useState("");
-
-  if (loading) return <LoadingScreen />;
 
   const productList = products
     .filter((product) => product)

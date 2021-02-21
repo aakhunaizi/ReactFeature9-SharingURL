@@ -23,6 +23,13 @@ const NavBar = (props) => {
 
       <div className="navbar-nav ml-auto">
         <NavProduct
+          to="/signup"
+          className="nav-item"
+          style={{ padding: "0.25em 1em" }}
+        >
+          Sign Up
+        </NavProduct>
+        <NavProduct
           to="/products"
           className="nav-item"
           style={{ padding: "0.25em 1em" }}

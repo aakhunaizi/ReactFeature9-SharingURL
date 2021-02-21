@@ -4,15 +4,9 @@ import { ListWrapper } from "../styles";
 import ShopItem from "./ShopItem";
 import SearchBar from "./SearchBar";
 import { useState } from "react";
-import { useSelector } from "react-redux";
-import LoadingShops from "./LoadingShops";
 
-const ShopList = () => {
-  const shops = useSelector((state) => state.shops.shops);
-  const loading = useSelector((state) => state.shops.loading);
+const ShopList = ({ shops }) => {
   const [query, setQuery] = useState("");
-
-  if (loading) return <LoadingShops />;
 
   const shopList = shops
     .filter((shop) => shop.name.toLowerCase().includes(query.toLowerCase()))
