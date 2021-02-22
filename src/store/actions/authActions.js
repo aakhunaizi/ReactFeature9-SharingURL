@@ -4,6 +4,7 @@ import * as types from "../actions/types";
 
 const setUser = (token) => {
   localStorage.setItem("token", token);
+  instance.defaults.headers.common.Authorization = `Bearer ${token}`;
   return {
     type: types.SET_USER,
     payload: decode(token),
@@ -40,6 +41,7 @@ export const signin = (user, history) => {
 
 export const signout = () => {
   localStorage.removeItem("token");
+  delete instance.defaults.headers.common.Authorization;
   return {
     type: types.SET_USER,
     payload: null,
