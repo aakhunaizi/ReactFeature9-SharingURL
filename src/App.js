@@ -25,10 +25,14 @@ const theme = {
 };
 
 function App() {
-  const [currentTheme, setCurrentTheme] = useState("light");
+  const [currentTheme, setCurrentTheme] = useState(
+    localStorage.theme || "light"
+  );
 
   const toggleTheme = () =>
-    setCurrentTheme(currentTheme === "light" ? "dark" : "light");
+    setCurrentTheme(localStorage.theme === "light" ? "dark" : "light");
+
+  localStorage.setItem("theme", currentTheme);
 
   return (
     <ThemeProvider theme={theme[currentTheme]}>

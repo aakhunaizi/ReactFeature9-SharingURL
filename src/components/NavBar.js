@@ -16,7 +16,7 @@ const NavBar = (props) => {
 
   const handleSignout = () => {
     dispatch(signout());
-    history.push("/");
+    history.replace("/");
   };
 
   return (

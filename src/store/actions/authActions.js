@@ -2,15 +2,21 @@ import instance from "./instance";
 import decode from "jwt-decode";
 import * as types from "../actions/types";
 
+const setUser = (token) => {
+  localStorage.setItem("token", token);
+  return {
+    type: types.SET_USER,
+    payload: decode(token),
+  };
+};
+
 export const signup = (newUser, history) => {
   return async (dispatch) => {
     try {
       const res = await instance.post("/signup", newUser);
-      dispatch({
-        type: types.SET_USER,
-        payload: decode(res.data.token),
-      });
-      history.push("/");
+      localStorage.setItem("token", res.data.token);
+      dispatch(setUser(res.data.token));
+      history.replace("/");
       alert("Successfully signed up");
     } catch (error) {
       console.error(error);
@@ -22,11 +28,9 @@ export const signin = (user, history) => {
   return async (dispatch) => {
     try {
       const res = await instance.post("/signin", user);
-      dispatch({
-        type: types.SET_USER,
-        payload: decode(res.data.token),
-      });
-      history.push("/");
+      localStorage.setItem("token", res.data.token);
+      dispatch(setUser(res.data.token));
+      history.replace("/");
       alert("Successfully signed in");
     } catch (error) {
       console.error(error);
@@ -35,14 +39,23 @@ export const signin = (user, history) => {
 };
 
 export const signout = () => {
-  return async (dispatch) => {
-    try {
-      dispatch({
-        type: types.SET_USER,
-        payload: null,
-      });
-    } catch (error) {
-      console.error(error);
-    }
+  localStorage.removeItem("token");
+  return {
+    type: types.SET_USER,
+    payload: null,
   };
+};
+
+export const checkForToken = () => (dispatch) => {
+  const token = localStorage.getItem("token");
+  if (token) {
+    const user = decode(token);
+    const currentTime = Date.now();
+    if (currentTime <= user.exp) {
+      dispatch(setUser(token));
+    } else {
+      localStorage.removeItem("token");
+      dispatch(signout());
+    }
+  }
 };
