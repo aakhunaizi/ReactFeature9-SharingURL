@@ -61,8 +61,9 @@ const ProductForm = () => {
             <label>Price</label>
             <input
               type="number"
+              step="any"
               name="price"
-              min="1"
+              min="0.1"
               placeholder="Enter product price"
               className="form-control"
               value={product.price}

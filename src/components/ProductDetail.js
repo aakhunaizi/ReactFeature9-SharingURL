@@ -22,7 +22,7 @@ const ProductDetail = () => {
       <h1>{product.name}</h1>
       <img src={product.image} alt={product.name} />
       <p>{product.description}</p>
-      <p>{product.price} KD</p>
+      <p>{product.price} BD</p>
       <DeleteButton productId={product.id} />
       <UpdateButton className="float-right" productSlug={product.slug} />
     </DetailWrapper>

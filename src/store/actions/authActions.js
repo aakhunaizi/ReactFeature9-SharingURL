@@ -18,7 +18,6 @@ export const signup = (newUser, history) => {
       localStorage.setItem("token", res.data.token);
       dispatch(setUser(res.data.token));
       history.replace("/");
-      alert("Successfully signed up");
     } catch (error) {
       console.error(error);
     }
@@ -32,7 +31,6 @@ export const signin = (user, history) => {
       localStorage.setItem("token", res.data.token);
       dispatch(setUser(res.data.token));
       history.replace("/");
-      alert("Successfully signed in");
     } catch (error) {
       console.error(error);
     }
